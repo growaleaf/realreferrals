@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>THE DROP KIT — words that work, and where they belong</title>
+<meta name="description" content="Ready-to-send messages for promoters: which message belongs in the deal groups, which in the family chats, and the rules that keep your desk open. No spam, no income promises.">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="THE DROP KIT — words that work">
+<meta property="og:description" content="The map most promoters never draw: sellers live in your deal groups, buyers live in your other chats. Messages for both — none of them lie.">
+<meta property="og:image" content="https://desk.accentle.com/og/kit.png">
+<meta property="og:url" content="https://desk.accentle.com/kit/">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.png">
+<style>
+  :root {
+    --bg:#0b0f14; --panel:#111823; --panel2:#182230; --ink:#eef3f8; --dim:#8fa0b3;
+    --green:#3ddc84; --amber:#ffb454; --red:#ff6b6b; --line:#1f2c3d; --line2:#2a3a50;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg); color:var(--ink); min-height:100vh;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(ellipse 90% 40% at 50% -5%, #14243a 0%, transparent 60%);
+  }
+  .wrap { width:min(680px,92vw); margin:0 auto; padding:26px 0 80px; }
+  a { color:var(--green); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .brand { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .brand .name { font-weight:900; letter-spacing:.04em; font-size:15px; }
+  .brand .name .r { color:var(--green); }
+  .brand a.back { font-size:12.5px; font-weight:700; color:var(--dim); }
+  h1 { font-size:clamp(26px,5.6vw,38px); font-weight:900; letter-spacing:-.025em; line-height:1.1; margin-top:34px; }
+  h1 span { color:var(--green); }
+  .sub { color:var(--dim); font-size:15px; margin-top:10px; max-width:58ch; }
+  .sub b { color:var(--ink); }
+  .secH { font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin:34px 0 10px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px; }
+  .label { display:block; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); margin:0 0 6px; }
+  input {
+    width:100%; background:var(--panel2); border:2px solid var(--line2); color:var(--ink);
+    border-radius:10px; padding:12px; font-size:16px; font-weight:800; outline:none; font-family:inherit;
+    text-transform:uppercase; letter-spacing:.1em;
+  }
+  input:focus { border-color:var(--green); }
+  .msg { font-size:13px; margin-top:8px; min-height:17px; }
+  .msg.err { color:var(--red); } .msg.ok { color:var(--green); }
+
+  .map { font-size:14px; }
+  .map .lane { display:grid; grid-template-columns:150px 1fr; gap:10px; padding:11px 0; border-bottom:1px solid var(--line); }
+  @media (max-width:480px){ .map .lane { grid-template-columns:1fr; gap:2px; } }
+  .map .lane:last-child { border-bottom:none; }
+  .map .who { font-weight:800; font-size:13px; color:var(--amber); }
+  .map .who.g { color:var(--green); }
+  .map .what { color:var(--dim); }
+  .map .what b { color:var(--ink); }
+
+  .drop { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; margin-top:12px; }
+  .drop .head { display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:8px; }
+  .drop .t { font-weight:900; font-size:14px; }
+  .drop .t span { color:var(--green); }
+  .drop .where { font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); }
+  .drop .where.g { color:var(--green); }
+  .drop pre {
+    white-space:pre-wrap; font-family:inherit; font-size:13.5px; color:var(--dim); line-height:1.55;
+    background:var(--panel2); border:1px solid var(--line2); border-radius:10px; padding:12px;
+  }
+  .drop pre b { color:var(--ink); font-weight:700; }
+  .drop .needs { font-size:12px; color:var(--red); margin-top:8px; display:none; }
+  .drop .needs.on { display:block; }
+  .drop .btns { display:flex; gap:8px; margin-top:10px; }
+  .drop .b { flex:1; text-align:center; font-weight:800; font-size:13.5px; padding:11px; border-radius:10px;
+             background:var(--panel2); color:var(--ink); border:2px solid var(--line2); cursor:pointer; }
+  .drop .b:hover { border-color:var(--green); text-decoration:none; }
+  .rules { background:#ff6b6b10; border:1px solid var(--red); border-radius:12px; padding:14px 16px; font-size:13.5px; margin-top:18px; }
+  .rules b { color:var(--red); }
+  .foot { text-align:center; color:var(--dim); font-size:12px; margin-top:52px; line-height:1.7; }
+  .foot a { color:var(--dim); text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <div class="name">THE <span class="r">REAL</span> DESK</div>
+    <a class="back" href="/">← the desk</a>
+  </div>
+
+  <h1>THE DROP <span>KIT</span></h1>
+  <p class="sub">The map most promoters never draw: <b>your deal groups are full of sellers, not buyers.</b> Brokers don't buy game packs — their families do. So the kit has two lanes: what you drop in the deal groups (the desk, the checker), and what you drop where people actually play (your tracked link).</p>
+
+  <div class="secH">Your code — personalizes every message below</div>
+  <div class="card">
+    <label class="label" for="code">Promoter code (optional — get one free <a href="/#join">at the desk</a>)</label>
+    <input id="code" type="text" placeholder="e.g. K7QMP2X" maxlength="16">
+    <div class="msg" id="code-msg"></div>
+  </div>
+
+  <div class="secH">The map</div>
+  <div class="card map">
+    <div class="lane"><span class="who">DEAL GROUPS</span><span class="what">They're colleagues, not customers. Drop <b>the desk</b> and <b>Deal Check</b> — the things a broker respects. Your game link would die here.</span></div>
+    <div class="lane"><span class="who g">FAMILY & FRIENDS</span><span class="what">Game night is a real thing people want. Drop <b>your tracked link</b> with a plain invitation. No hustle voice — you're inviting, not selling.</span></div>
+    <div class="lane"><span class="who g">COMMUNITY CHATS</span><span class="what">Church, mosque, school parents, the office chat, the diaspora cousins. One good drop when the moment is right — youth night, weekend, holiday call.</span></div>
+    <div class="lane"><span class="who">YOUR STATUS</span><span class="what">The one place both worlds see you. A status post about changing how you work reaches brokers AND family without blasting anyone.</span></div>
+  </div>
+
+  <div class="secH">Lane 1 — for the deal groups</div>
+
+  <div class="drop">
+    <div class="head"><span class="t">THE <span>DESK DROP</span></span><span class="where">DEAL GROUPS</span></div>
+    <pre id="m1">Years in these groups and I've never seen one commission actually paid out. I found a small one that pays on rails: 50% of net per sale — $2.28 on a $4.99 pack — monthly PayPal from a UK company, $0 to join. No LOI, no POF, no NCNDA. The terms are printed and you check your own ledger, no closer to chase.
+
+No promises — their own terms say most promoters earn nothing. That's how you know it's real.
+
+Check it before you believe it: https://desk.accentle.com/check/
+The offer: https://desk.accentle.com</pre>
+    <div class="btns"><span class="b" data-copy="m1">Copy</span><a class="b" data-wa="m1">WhatsApp →</a></div>
+  </div>
+
+  <div class="drop">
+    <div class="head"><span class="t">THE <span>CHECKER DROP</span></span><span class="where">DEAL GROUPS</span></div>
+    <pre id="m2">Before anyone spends another month on that SCO — paste it into this first. Free, runs on your phone, nothing uploaded. Shows the red flags and the chain math: https://desk.accentle.com/check/</pre>
+    <div class="btns"><span class="b" data-copy="m2">Copy</span><a class="b" data-wa="m2">WhatsApp →</a></div>
+  </div>
+
+  <div class="drop">
+    <div class="head"><span class="t">THE <span>VOICE NOTE</span></span><span class="where">DEAL GROUPS · READ IT ALOUD</span></div>
+    <pre id="m3">You know me — I've been in these groups as long as you. Listen. I'm not bringing you a mandate. It's small, and I'll say that first. A games company pays half of net per sale through a tracked link — two dollars and change on each pack. Monthly PayPal. Zero fees to join, at any stage. And you check your own ledger — no closer, no paymaster, no waiting on anybody's confirmation. I ran it through a scam checker before I touched it. It passes. I'll drop both links under this. Check everything yourself — that's the whole point of it.</pre>
+    <div class="btns"><span class="b" data-copy="m3">Copy script</span></div>
+  </div>
+
+  <div class="secH">Lane 2 — where people actually play</div>
+
+  <div class="drop">
+    <div class="head"><span class="t">THE <span>GAME NIGHT DROP</span></span><span class="where g">FAMILY & FRIENDS</span></div>
+    <pre id="m4">Game night, tonight? Everyone joins from their own phone with one room code — no app, works in the browser. Quick party games, loser explains themselves 😅 Start here: <b class="lnk">LINK</b></pre>
+    <div class="needs" data-needs="1">Needs your code above — this one carries your tracked link.</div>
+    <div class="btns"><span class="b" data-copy="m4">Copy</span><a class="b" data-wa="m4">WhatsApp →</a></div>
+  </div>
+
+  <div class="drop">
+    <div class="head"><span class="t">THE <span>DIASPORA DROP</span></span><span class="where g">THE COUSINS ABROAD</span></div>
+    <pre id="m5">Next family call, try this — everybody joins from their phone, takes two minutes to start, and it works from any country: <b class="lnk">LINK</b> You handle the room code, I'll handle the noise 😄</pre>
+    <div class="needs" data-needs="1">Needs your code above — this one carries your tracked link.</div>
+    <div class="btns"><span class="b" data-copy="m5">Copy</span><a class="b" data-wa="m5">WhatsApp →</a></div>
+  </div>
+
+  <div class="drop">
+    <div class="head"><span class="t">THE <span>COMMUNITY DROP</span></span><span class="where g">CHURCH · MOSQUE · SCHOOL · OFFICE</span></div>
+    <pre id="m6">For the next youth night / family day — party games everyone can join from their own phone, one room code, nothing to install: <b class="lnk">LINK</b> Happy to set it up on the day.</pre>
+    <div class="needs" data-needs="1">Needs your code above — this one carries your tracked link.</div>
+    <div class="btns"><span class="b" data-copy="m6">Copy</span><a class="b" data-wa="m6">WhatsApp →</a></div>
+  </div>
+
+  <div class="drop">
+    <div class="head"><span class="t">THE <span>STATUS POST</span></span><span class="where">YOUR WHATSAPP STATUS</span></div>
+    <pre id="m7">Spent years chasing 2% of imaginary billions. These days I run a small desk that pays 50% of something real. Small. Real. Paid. That's the whole strategy now → https://desk.accentle.com</pre>
+    <div class="btns"><span class="b" data-copy="m7">Copy</span></div>
+  </div>
+
+  <div class="rules">
+    <b>The three ways to lose your desk:</b> blasting strangers (spam voids your balance — it's in <a href="https://accentle.com/partners/terms/" rel="noopener" style="color:var(--red); text-decoration:underline;">the terms</a>), promising income (screenshots-as-bait is the mandate world's trick, and it terminates here), and buying through your own link. Drop where you're known. Say what's true. Let people check. That discipline is why your link is worth something.
+  </div>
+
+  <div class="foot">
+    Part of <a href="/">THE REAL DESK</a> · <a href="/check/">Deal Check</a> · <a href="/math/">The Math</a> · <a href="/sheet/">Deal Sheet</a><br>
+    Operator: Leafwind Studios Ltd · <a href="https://accentle.com/partners/terms/" rel="noopener">Terms</a> · No income promised. 18+.<br>
+    The Hive — powered by AI.
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var API_BASE = "https://letsplay-api.kingshotpro.workers.dev";
+  var $ = function (id) { return document.getElementById(id); };
+  var verified = "";
+  var checkTimer = null;
+
+  function linkFor() { return verified ? "https://accentle.com/arcade/?amb=" + verified : ""; }
+
+  function renderLinks() {
+    var link = linkFor();
+    document.querySelectorAll("pre .lnk").forEach(function (el) {
+      el.textContent = link || "[get your code above — your tracked link goes here]";
+    });
+    document.querySelectorAll(".needs").forEach(function (el) {
+      el.classList.toggle("on", !link);
+    });
+  }
+
+  $("code").addEventListener("input", function () {
+    var code = $("code").value.trim().toUpperCase();
+    var msg = $("code-msg");
+    clearTimeout(checkTimer);
+    verified = ""; renderLinks();
+    if (!code) { msg.className = "msg"; msg.textContent = ""; return; }
+    msg.className = "msg"; msg.textContent = "Checking against the live ledger…";
+    checkTimer = setTimeout(async function () {
+      try {
+        var r = await fetch(API_BASE + "/api/amb/stats?code=" + encodeURIComponent(code));
+        var s = await r.json();
+        if (s && s.ok) {
+          verified = code;
+          msg.className = "msg ok"; msg.textContent = "Code verified — every message below now carries your tracked link.";
+        } else {
+          msg.className = "msg err"; msg.textContent = "Not in the ledger. Get your code free at the desk first.";
+        }
+      } catch (e) {
+        msg.className = "msg err"; msg.textContent = "Network hiccup — try again in a moment.";
+      }
+      renderLinks();
+    }, 500);
+  });
+
+  function textOf(id) { return $(id).innerText; }
+
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = textOf(b.dataset.copy);
+      var done = function () { var o = b.textContent; b.textContent = "Copied!"; setTimeout(function () { b.textContent = o; }, 1400); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, done);
+      else done();
+    });
+  });
+
+  document.querySelectorAll("[data-wa]").forEach(function (b) {
+    b.addEventListener("click", function (e) {
+      b.href = "https://wa.me/?text=" + encodeURIComponent(textOf(b.dataset.wa));
+    });
+    b.target = "_blank"; b.rel = "noopener";
+  });
+
+  renderLinks();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>THE MATH — 2% of zero, versus $2.28 that exists</title>
+<meta name="description" content="Put your mandate deal and a real commission deal side by side. Expected value, chain math, and the number nobody in the group chat wants to say out loud.">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="THE MATH — 2% of zero is zero">
+<meta property="og:description" content="Your $50M deal at 2% commission is worth $1,000,000 — times a closing probability of zero. Run both worlds side by side.">
+<meta property="og:image" content="https://desk.accentle.com/og/math.png">
+<meta property="og:url" content="https://desk.accentle.com/math/">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.png">
+<style>
+  :root {
+    --bg:#0b0f14; --panel:#111823; --panel2:#182230; --ink:#eef3f8; --dim:#8fa0b3;
+    --green:#3ddc84; --amber:#ffb454; --red:#ff6b6b; --line:#1f2c3d; --line2:#2a3a50;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg); color:var(--ink); min-height:100vh;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(ellipse 90% 40% at 50% -5%, #14243a 0%, transparent 60%);
+  }
+  .wrap { width:min(680px,92vw); margin:0 auto; padding:26px 0 80px; }
+  a { color:var(--green); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .brand { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .brand .name { font-weight:900; letter-spacing:.04em; font-size:15px; }
+  .brand .name .r { color:var(--green); }
+  .brand a.back { font-size:12.5px; font-weight:700; color:var(--dim); }
+  h1 { font-size:clamp(26px,5.6vw,38px); font-weight:900; letter-spacing:-.025em; line-height:1.1; margin-top:34px; }
+  h1 span { color:var(--green); }
+  .sub { color:var(--dim); font-size:15px; margin-top:10px; max-width:56ch; }
+  .secH { font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin:34px 0 10px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px; }
+  label { display:block; font-size:13px; color:var(--dim); margin:12px 0 5px; }
+  label:first-child { margin-top:0; }
+  input[type=number], input[type=text] {
+    width:100%; background:var(--panel2); border:2px solid var(--line2); color:var(--ink);
+    border-radius:10px; padding:11px; font-size:16px; font-weight:700; outline:none; font-family:inherit;
+  }
+  input:focus { border-color:var(--green); }
+  input[type=range] { width:100%; margin-top:8px; accent-color:var(--green); }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .out { margin-top:16px; border-top:1px solid var(--line); padding-top:14px; font-size:14.5px; }
+  .out .line { display:flex; justify-content:space-between; gap:12px; padding:6px 0; }
+  .out .line .k { color:var(--dim); }
+  .out .line .v { font-weight:800; text-align:right; }
+  .out .line .v.red { color:var(--red); }
+  .out .line .v.green { color:var(--green); }
+  .out .line .v.amber { color:var(--amber); }
+  .big { font-size:clamp(22px,5vw,30px); font-weight:900; letter-spacing:-.02em; margin-top:8px; }
+  .big.red { color:var(--red); } .big.green { color:var(--green); }
+  .note { font-size:13px; color:var(--dim); margin-top:10px; line-height:1.6; }
+  .punch { background:#3ddc8410; border:1px solid var(--green); border-radius:12px; padding:16px; font-size:14.5px; margin-top:34px; }
+  .punch b { color:var(--green); }
+  .cta { display:block; text-align:center; font-weight:800; font-size:16px; padding:14px; border-radius:11px;
+         background:var(--green); color:#06220f; margin-top:18px; }
+  .cta:hover { text-decoration:none; }
+  .foot { text-align:center; color:var(--dim); font-size:12px; margin-top:52px; line-height:1.7; }
+  .foot a { color:var(--dim); text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <div class="name">THE <span class="r">REAL</span> DESK</div>
+    <a class="back" href="/">← the desk</a>
+  </div>
+
+  <h1>THE <span>MATH</span></h1>
+  <p class="sub">Two deals, side by side: the one in your deal groups, and the one on this desk. Same arithmetic both worlds use — just done out loud.</p>
+
+  <div class="secH">Deal A — the one you're chasing</div>
+  <div class="card">
+    <div class="row2">
+      <div><label for="size">Deal size (USD)</label><input id="size" type="number" value="50000000" min="0" inputmode="numeric"></div>
+      <div><label for="pct">Your commission %</label><input id="pct" type="number" value="2" min="0" max="100" step="0.5" inputmode="decimal"></div>
+    </div>
+    <div class="row2">
+      <div><label for="brokers">Brokers in the chain</label><input id="brokers" type="number" value="7" min="1" max="30" inputmode="numeric"></div>
+      <div><label for="years">Years you've chased it</label><input id="years" type="number" value="3" min="0" max="40" inputmode="numeric"></div>
+    </div>
+    <div class="out">
+      <div class="line"><span class="k">Your commission if it closes</span><span class="v amber" id="a-if">$1,000,000</span></div>
+      <div class="line"><span class="k">Chain load (all brokers on your %)</span><span class="v" id="a-chain">14% of the deal</span></div>
+      <div class="line"><span class="k">Deals with this anatomy that close</span><span class="v red">effectively none</span></div>
+      <div class="line"><span class="k">Expected value</span><span class="v red" id="a-ev">$0</span></div>
+      <div class="line"><span class="k">Your cost so far</span><span class="v" id="a-cost">3 years of WhatsApp</span></div>
+      <div class="big red" id="a-big">2% of zero is zero.</div>
+      <div class="note">The commission is real arithmetic on an unreal number. Multiply anything by a closing probability of zero and the answer never changes — no matter how many zeros the deal has.</div>
+    </div>
+  </div>
+
+  <div class="secH">Deal B — this desk</div>
+  <div class="card">
+    <label for="sales">Packs your links sell</label>
+    <input id="sales" type="range" min="0" max="200" value="9">
+    <div class="out">
+      <div class="line"><span class="k">Sales</span><span class="v" id="b-n">9</span></div>
+      <div class="line"><span class="k">Price each</span><span class="v">$4.99</span></div>
+      <div class="line"><span class="k">Your cut per sale (50% of net)</span><span class="v">$2.28</span></div>
+      <div class="line"><span class="k">Your commission</span><span class="v green" id="b-sum">$20.52</span></div>
+      <div class="line"><span class="k">Probability it pays if the sales happen</span><span class="v green">1 — it's a ledger, not a promise</span></div>
+      <div class="big green" id="b-big">$20.52 — crosses the $20 minimum. That's a PayPal batch.</div>
+      <div class="note" id="b-note">Each sale matures 30 days (refund window), then goes payable and out in the monthly batch. No income is promised — zero sales pays zero. The difference from Deal A is not the size. It's that the multiplication is by 1, not 0.</div>
+    </div>
+  </div>
+
+  <div class="punch">
+    <b>The line that matters:</b> a million dollars at probability zero is worth less than $2.28 at probability one. Everyone in your groups knows the first half of that sentence. The ones who act on the second half stop forwarding ghosts and start running networks that pay. The real prize isn't the $2.28 — it's finding out, once and for real, that commission can actually arrive. After that, everything you build is built on ground.
+  </div>
+
+  <a class="cta" href="/">See the deal that multiplies by one →</a>
+
+  <div class="foot">
+    Part of <a href="/">THE REAL DESK</a> · <a href="/check/">Deal Check</a> · <a href="/sheet/">Deal Sheet</a> · <a href="/kit/">Drop Kit</a><br>
+    Operator: Leafwind Studios Ltd · <a href="https://accentle.com/partners/terms/" rel="noopener">Terms</a> · No income promised. 18+.<br>
+    The Hive — powered by AI.
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var fmt = function (n) {
+    if (!isFinite(n)) return "$0";
+    return "$" + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+  var PER_SALE_CENTS = 228; // 50% of net on $4.99: fee = round(499*.029)+30 = 44; net 455; half = 228.
+
+  function dealA() {
+    var size = Math.max(0, parseFloat($("size").value || "0"));
+    var pct = Math.max(0, Math.min(100, parseFloat($("pct").value || "0")));
+    var brokers = Math.max(1, Math.min(30, parseInt($("brokers").value || "1", 10)));
+    var years = Math.max(0, Math.min(40, parseInt($("years").value || "0", 10)));
+    var ifCloses = size * pct / 100;
+    var chain = brokers * pct;
+    $("a-if").textContent = fmt(ifCloses);
+    $("a-chain").textContent = (Math.round(chain * 10) / 10) + "% of the deal";
+    $("a-ev").textContent = "$0";
+    $("a-cost").textContent = years === 0 ? "your next years, if you stay" : years + " year" + (years === 1 ? "" : "s") + " of WhatsApp";
+    $("a-big").textContent = pct + "% of zero is zero.";
+  }
+  ["size", "pct", "brokers", "years"].forEach(function (id) { $(id).addEventListener("input", dealA); });
+
+  function dealB() {
+    var n = parseInt($("sales").value, 10);
+    var cents = n * PER_SALE_CENTS;
+    var dollars = cents / 100;
+    $("b-n").textContent = n;
+    $("b-sum").textContent = "$" + dollars.toFixed(2);
+    var big = $("b-big");
+    if (n === 0) {
+      big.textContent = "$0.00 — zero sales pays zero. This desk doesn't pretend otherwise.";
+      big.className = "big";
+    } else if (dollars < 20) {
+      var need = Math.ceil((2000 - cents) / PER_SALE_CENTS);
+      big.textContent = "$" + dollars.toFixed(2) + " — real, maturing. " + need + " more sale" + (need === 1 ? "" : "s") + " to cross the $20 batch minimum.";
+      big.className = "big";
+    } else {
+      big.textContent = "$" + dollars.toFixed(2) + " — crosses the $20 minimum. That's a PayPal batch.";
+      big.className = "big green";
+    }
+  }
+  $("sales").addEventListener("input", dealB);
+
+  dealA(); dealB();
+})();
+</script>
+</body>
+</html>

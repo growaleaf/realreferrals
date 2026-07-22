@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DEAL CHECK — paste the deal, get the truth</title>
+<meta name="description" content="Free checker for WhatsApp broker deals — BLCO, gold dust, SBLC, BTC OTC, MTN bulk. Paste the text, see the red flags, the chain math, and the 60-second reality test. Nothing is uploaded.">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="DEAL CHECK — paste the deal, get the truth">
+<meta property="og:description" content="Before you spend another month on that SCO: paste it here. Red flags, chain math, verdict. Free, runs on your phone, nothing uploaded.">
+<meta property="og:image" content="https://desk.accentle.com/og/check.png">
+<meta property="og:url" content="https://desk.accentle.com/check/">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.png">
+<style>
+  :root {
+    --bg:#0b0f14; --panel:#111823; --panel2:#182230; --ink:#eef3f8; --dim:#8fa0b3;
+    --green:#3ddc84; --amber:#ffb454; --red:#ff6b6b; --line:#1f2c3d; --line2:#2a3a50;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg); color:var(--ink); min-height:100vh;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(ellipse 90% 40% at 50% -5%, #14243a 0%, transparent 60%);
+  }
+  .wrap { width:min(680px,92vw); margin:0 auto; padding:26px 0 80px; }
+  a { color:var(--green); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .brand { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .brand .name { font-weight:900; letter-spacing:.04em; font-size:15px; }
+  .brand .name .r { color:var(--green); }
+  .brand a.back { font-size:12.5px; font-weight:700; color:var(--dim); }
+  h1 { font-size:clamp(26px,5.6vw,38px); font-weight:900; letter-spacing:-.025em; line-height:1.1; margin-top:34px; }
+  h1 span { color:var(--green); }
+  .sub { color:var(--dim); font-size:15px; margin-top:10px; max-width:56ch; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px; margin-top:18px; }
+  textarea {
+    width:100%; min-height:170px; background:var(--panel2); border:2px solid var(--line2); color:var(--ink);
+    border-radius:12px; padding:13px; font-size:15px; outline:none; font-family:inherit; resize:vertical; line-height:1.5;
+  }
+  textarea:focus { border-color:var(--green); }
+  .btn { display:block; width:100%; border:none; cursor:pointer; font-weight:800; border-radius:11px;
+         font-size:16px; padding:14px; margin-top:12px; font-family:inherit; background:var(--green); color:#06220f; }
+  .btn:active { transform:scale(.985); }
+  .samples { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .chip { font-size:12px; font-weight:700; color:var(--dim); background:var(--panel2); border:1px solid var(--line2);
+          border-radius:999px; padding:6px 11px; cursor:pointer; }
+  .chip:hover { color:var(--ink); }
+
+  .verdict { display:none; border-radius:14px; padding:18px; margin-top:18px; border:1px solid; }
+  .verdict.on { display:block; }
+  .verdict .big { font-size:21px; font-weight:900; letter-spacing:-.01em; }
+  .verdict .why { font-size:13.5px; margin-top:6px; }
+  .v-clean { background:#3ddc8412; border-color:var(--green); }
+  .v-clean .big { color:var(--green); }
+  .v-caution { background:#ffb45412; border-color:var(--amber); }
+  .v-caution .big { color:var(--amber); }
+  .v-high { background:#ff6b6b12; border-color:var(--red); }
+  .v-high .big { color:var(--red); }
+
+  .flags { display:none; margin-top:14px; }
+  .flags.on { display:block; }
+  .flag { background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--amber);
+          border-radius:10px; padding:12px 14px; margin-top:9px; font-size:13.5px; }
+  .flag.crit { border-left-color:var(--red); }
+  .flag .t { font-weight:800; font-size:13px; }
+  .flag.crit .t { color:var(--red); }
+  .flag .w { color:var(--dim); margin-top:3px; }
+  .flag .m { color:var(--dim); font-size:12px; margin-top:5px; font-style:italic; overflow-wrap:anywhere; }
+
+  .secH { font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin:34px 0 6px; }
+  .chain label { display:block; font-size:13px; color:var(--dim); margin:10px 0 4px; }
+  .chain input { width:100%; background:var(--panel2); border:2px solid var(--line2); color:var(--ink);
+                 border-radius:10px; padding:11px; font-size:16px; font-weight:700; outline:none; font-family:inherit; }
+  .chain .out { margin-top:12px; font-size:14.5px; }
+  .chain .out b { color:var(--amber); }
+  .chain .out .note { color:var(--dim); font-size:13px; margin-top:5px; }
+
+  ol.test { margin-left:20px; font-size:14px; }
+  ol.test li { margin:9px 0; }
+  ol.test b { color:var(--ink); }
+  ol.test .ours { color:var(--green); font-weight:800; font-size:12px; letter-spacing:.05em; }
+  .test-note { font-size:13px; color:var(--dim); margin-top:10px; }
+
+  .sharebar { display:flex; gap:8px; margin-top:14px; }
+  .share { flex:1; text-align:center; font-weight:800; font-size:14px; padding:12px; border-radius:11px;
+           background:var(--panel2); color:var(--ink); border:2px solid var(--line2); cursor:pointer; }
+  .share:hover { text-decoration:none; border-color:var(--green); }
+  .fine { font-size:12px; color:var(--dim); margin-top:16px; line-height:1.6; }
+  .cta { background:#3ddc8410; border:1px solid var(--green); border-radius:12px; padding:14px 16px; font-size:14px; margin-top:18px; }
+  .foot { text-align:center; color:var(--dim); font-size:12px; margin-top:52px; line-height:1.7; }
+  .foot a { color:var(--dim); text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <div class="name">THE <span class="r">REAL</span> DESK</div>
+    <a class="back" href="/">← the desk</a>
+  </div>
+
+  <h1>DEAL <span>CHECK</span></h1>
+  <p class="sub">Paste the deal — the SCO, the "mandate offer", the OTC message. This runs on your phone; nothing is uploaded, nobody sees what you paste. Built from the anatomy of a decade of WhatsApp mandate deals.</p>
+
+  <div class="card">
+    <textarea id="deal" placeholder="Paste the deal text here…" spellcheck="false"></textarea>
+    <div class="samples">
+      <span class="chip" data-s="gold">Example: gold dust SCO</span>
+      <span class="chip" data-s="btc">Example: BTC OTC</span>
+      <span class="chip" data-s="ours">This desk's own offer</span>
+    </div>
+    <button class="btn" id="run">Run the check</button>
+  </div>
+
+  <div class="verdict" id="verdict"><div class="big" id="v-big"></div><div class="why" id="v-why"></div></div>
+  <div class="flags" id="flags"></div>
+
+  <div class="secH">The chain math — do it for your deal</div>
+  <div class="card chain">
+    <label for="nb">How many brokers stand between the buyer's money and the seller — counting you?</label>
+    <input id="nb" type="number" min="1" max="30" value="6" inputmode="numeric">
+    <div class="out" id="chain-out"></div>
+  </div>
+
+  <div class="secH">The 60-second reality test — for ANY deal, including ours</div>
+  <div class="card">
+    <ol class="test">
+      <li><b>Can you open the product yourself, right now?</b> Not a photo of it — the thing. <span class="ours">THIS DESK: <a href="https://accentle.com/arcade/" rel="noopener">accentle.com/arcade</a> — loads in your browser.</span></li>
+      <li><b>Is the operating company named, with terms you can read?</b> <span class="ours">THIS DESK: Leafwind Studios Ltd — <a href="https://accentle.com/partners/terms/" rel="noopener">terms here</a>.</span></li>
+      <li><b>Is the commission math printed, so you can check it?</b> <span class="ours">THIS DESK: 50% of net; $4.99 − $0.44 fees = $4.55; half is $2.28. Check it.</span></li>
+      <li><b>Is joining free — with no fee arriving at any later "stage"?</b> <span class="ours">THIS DESK: $0.00, forever. A fee at any point would fail our own test.</span></li>
+      <li><b>Can you verify your own numbers without begging a human?</b> <span class="ours">THIS DESK: <a href="/#ledger">a live ledger</a>, computed from real charges every time you ask.</span></li>
+    </ol>
+    <p class="test-note">A real deal passes all five in under a minute. A mandate deal fails the first question and hides behind "procedure" for the other four.</p>
+  </div>
+
+  <div class="cta">
+    Tired of checking deals that fail? There's one on this desk that passes its own test: small, real, and it pays — <a href="/">read it like a broker →</a>
+  </div>
+
+  <div class="sharebar">
+    <a class="share" id="wa" target="_blank" rel="noopener">Share on WhatsApp</a>
+    <span class="share" id="copy">Copy link</span>
+  </div>
+
+  <p class="fine">Deal Check reads patterns in text. It cannot judge any specific person's honesty — it judges a deal's anatomy against patterns documented across advance-fee and instrument frauds for decades. A clean score is not a guarantee, and a flagged score is not an accusation. Educational only; not legal or financial advice. Nothing you paste leaves your phone.</p>
+
+  <div class="foot">
+    Part of <a href="/">THE REAL DESK</a> · Operator: Leafwind Studios Ltd · <a href="https://accentle.com/partners/terms/" rel="noopener">Terms</a><br>
+    The Hive — powered by AI.
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+
+  // Each rule: group tag, weight, regex, why it matters. A group fires once (first match shown).
+  var RULES = [
+    { t:"Advance fee", w:5, crit:true,
+      re:/activation fee|registration fee|processing fee|certificate (fee|cost|payment)|storage fee|demurrage|customs (fee|duty|clearance)|clearance fee|legalization|notariz|pay (a |the )?(small |token )?(fee|sum|amount)|upfront (fee|payment|cost)|(fee|payment) (before|prior to) (release|delivery|lift)|TTM.{0,40}(travel|flight|hotel|visa)/i,
+      why:"Money flowing FROM the broker TO the deal is the deal. Real counterparties pay their own costs. Every 'small fee to unlock the big money' is the entire business model — there is never a big money." },
+    { t:"Bank instruments", w:4,
+      re:/\bSBLC\b|MT[- ]?760|MT[- ]?103|MT[- ]?799|bank guarantee|\bBG\/SBLC\b|standby letter of credit|medium.?term.?notes?|\bPPP\b|private placement (program|platform)|monetiz(e|ation)|fresh cut|slightly seasoned/i,
+      why:"Leased SBLCs, MT760 'blocks', monetization, PPP trading platforms — this instrument vocabulary describes products that do not exist at retail. Banks do not sell them through WhatsApp chains. Decades of documented fraud, zero documented closings." },
+    { t:"Commodity cosplay", w:4,
+      re:/\bBLCO\b|bonny light|crude oil allocation|\bD2\b|JP ?54|EN ?590|jet fuel|aviation fuel|LNG (allocation|cargo)|gold (dust|dore|bars?|nuggets?)|dore bars?|\bAU\b.{0,20}(metal|gold|kg)|copper cathodes?|sugar IC[- ]?45|urea 46|used rails?|scrap (rails?|metal).{0,20}(deal|offer)/i,
+      why:"Real commodity desks trade on terminals with vetted counterparties, letters of credit from named banks, and inspection at port. A commodity that only exists in a PDF and a WhatsApp forward is a prop." },
+    { t:"Paper procedure", w:3,
+      re:/\bLOI\b|\bICPO\b|\bFCO\b|\bSCO\b|\bNCNDA\b|\bIMFPA\b|\bPOF\b|proof of funds|\bBCL\b|bank comfort letter|\bRWA\b|ready,? willing and able|\bATV\b|authority to verify|banking coordinates|board resolution|soft (probe|corporate offer)/i,
+      why:"LOI → ICPO → FCO → NCNDA → IMFPA is not how anything real is bought or sold anywhere on earth. The procedure exists to feel official, keep you in the chain, and set up the fee request." },
+    { t:"Chain talk", w:3,
+      re:/(seller|buyer).{0,12}mandate|mandate to the (seller|buyer)|direct to (the )?(seller|buyer|refinery|owner|source)|no (broker )?chain|chain of (brokers|command)|commission structure|[0-9](\.[0-9])? ?% (closed|open)|fee protection agreement|paymaster/i,
+      why:"'Direct to seller, no chain' is said exclusively by people inside long chains. Count the brokers: every 'mandate' between money and goods is standing on a percent, and the percents sum to a number no real counterparty will ever sign." },
+    { t:"Crypto OTC bait", w:3,
+      re:/BTC.{0,25}OTC|OTC.{0,25}(BTC|bitcoin)|USDT.{0,20}(TRC ?20|ERC ?20)|below market (rate|price)|(gross|net) discount.{0,20}(BTC|coin)|buyer.{0,20}(ready|standing by).{0,30}(POF|funds|escrow)|per coin.{0,20}discount|\bM[- ]?T[- ]?N\b.{0,40}(deal|allocation|bulk|discount)/i,
+      why:"Nobody sells bitcoin or bulk airtime 'below market' to strangers — the market buys at market, instantly, with no chain. A discount that exists only for you is the hook of the advance-fee play." },
+    { t:"Urgency & secrecy", w:2,
+      re:/urgent(ly)?|within 24 ?h(ou)?rs|48 ?h(ou)?rs|this week only|expires (today|tomorrow)|serious (buyers?|sellers?|people|inquiries) only|no time.?wasters?|don'?t (circumvent|go around)|circumvention|strictly confidential|tell no one/i,
+      why:"Real deals survive a week of thinking. Manufactured urgency and secrecy exist to stop you doing exactly what you're doing right now — checking." },
+    { t:"Proof theater", w:2,
+      re:/screen ?shot|bank confirmation letter|attestation|certificate of (origin|ownership|deposit)|assay report|SGS report.{0,20}(attached|available)|POF (available|ready|on request)|hit (and|&) confirm/i,
+      why:"Screenshots, certificates and 'confirmations' are the cheapest things on earth to fake. Real verification is a live system YOU operate — a ledger you refresh, a product you open — never a document someone hands you." },
+    { t:"Costume titles", w:2,
+      re:/his (excellency|highness)|\bsheikh\b|royal famil(y|ies)|\bprince(ss)?\b.{0,20}(deal|gold|fund)|barrister|\brev(erend)?\b.{0,15}(deal|fund)|from the (CBN|central bank)/i,
+      why:"Royalty, excellencies and barristers do not source counterparties in WhatsApp groups. Titles are costume; the costume is doing the work the deal can't." },
+    { t:"Ghost-scale numbers", w:2,
+      re:/\b\d+(\.\d+)? ?(billion|bn)\b|\$ ?\d{2,3},?\d{3},?\d{3}|\b(5[0-9]|[6-9][0-9]|[1-9][0-9]{2,}) ?(million|m)\b|million (USD|dollars|EUR|euros)/i,
+      why:"The bigger the number, the smaller the chance anyone in the chat has ever touched it. Scale is the bait: 2% of an imaginary $50M feels better than 50% of a real $5. Feels better; pays worse." }
+  ];
+
+  var SAMPLES = {
+    gold: "SCO — AU GOLD DUST, 250KG AVAILABLE. Origin: Ghana. Purity 96%+. Price: $38,000/kg (gross), $2,000 discount per kg for serious buyers. Procedure: Buyer issues ICPO with POF + passport. Seller issues FCO. NCNDA/IMFPA signed by all mandates. Commission: 2% closed, 1% open per side. Buyer pays assay + certificate fee ($8,500) before lift. TTM in Accra within 48hrs. Serious buyers only, no time wasters. Direct to seller mandate — no chain.",
+    btc: "BTC OTC DEAL — buyer is ready with POF. 500 BTC available below market, gross discount 6%, net 4%. USDT TRC20 settlement via escrow. Mandate to the buyer side here — commission structure 1% closed 0.5% open. Procedure: LOI, then banking coordinates, hit and confirm on first tranche within 24hrs. Strictly confidential, don't circumvent. Serious sellers only.",
+    ours: "OFFER — REAL DEAL SHEET. Product: LET'S PLAY party game packs, digital, delivered instantly, playable at accentle.com/arcade. Role: independent promoter with tracked link. Compensation: 50% of net per sale — a $4.99 pack pays $2.28 after card costs. Window: 90 days per referred buyer. Maturation: 30 days (refund window). Payout: monthly PayPal batch, $20 minimum, from Leafwind Studios Ltd (England & Wales). Cost to join: $0.00, at every stage, forever. Verify the ledger yourself at desk.accentle.com. No income promised; most promoters earn nothing; what closes, pays."
+  };
+
+  document.querySelectorAll(".chip").forEach(function (c) {
+    c.addEventListener("click", function () {
+      $("deal").value = SAMPLES[c.dataset.s] || "";
+      run();
+      window.scrollTo({ top: $("verdict").offsetTop - 80, behavior: "smooth" });
+    });
+  });
+
+  function esc(s) { return s.replace(/[&<>"]/g, function (ch) { return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[ch]; }); }
+
+  function run() {
+    var text = $("deal").value.trim();
+    var V = $("verdict"), F = $("flags");
+    if (!text) { V.className = "verdict"; F.className = "flags"; return; }
+    var hits = [], score = 0;
+    RULES.forEach(function (r) {
+      var m = text.match(r.re);
+      if (m) { hits.push({ r: r, m: m[0] }); score += r.w; }
+    });
+    var cls, big, why;
+    if (score === 0) {
+      cls = "v-clean";
+      big = "No classic mandate-world patterns found.";
+      why = "That does NOT make it real — it makes it unscored. Now run the 60-second reality test below: open the product, find the named company, check the math, confirm $0 to join, verify the numbers yourself.";
+    } else if (score <= 4) {
+      cls = "v-caution";
+      big = "CAUTION — " + hits.length + " pattern" + (hits.length > 1 ? "s" : "") + " from the world of deals that don't close.";
+      why = "Could be sloppy language, could be the anatomy showing through. Read the flags below, then make it pass the reality test before you give it another hour of your life.";
+    } else if (score <= 9) {
+      cls = "v-high";
+      big = "HIGH RISK — this has the anatomy of the deals that never close.";
+      why = "Multiple structural markers of the mandate world. In the documented history of these patterns, the money only ever moves one direction: from the broker, in 'fees'. Do not send anyone anything.";
+    } else {
+      cls = "v-high";
+      big = "THE PATTERN — this is the machine itself.";
+      why = "This message is assembled from the standard kit: instruments or commodities that exist on paper, a procedure that feels official, a chain standing on percents, and somewhere ahead of you — a fee. Years go in. Nothing comes out. You are the product.";
+    }
+    V.className = "verdict on " + cls;
+    $("v-big").textContent = big;
+    $("v-why").textContent = why;
+    F.className = "flags on";
+    F.innerHTML = hits.map(function (h) {
+      return '<div class="flag' + (h.r.crit ? " crit" : "") + '"><div class="t">' + esc(h.r.t) +
+             (h.r.crit ? " — CRITICAL" : "") + '</div><div class="w">' + esc(h.r.why) +
+             '</div><div class="m">Matched: "' + esc(h.m.slice(0, 80)) + '"</div></div>';
+    }).join("");
+  }
+  $("run").addEventListener("click", run);
+
+  function chain() {
+    var n = Math.max(1, Math.min(30, parseInt($("nb").value || "1", 10)));
+    var pct = n * 2;
+    var out = "<b>" + n + " brokers × 2% each = " + pct + "% of the deal in commissions.</b>";
+    var note;
+    if (pct <= 4) note = "Tight — real trades do run 1–3% total. If everything else checks out, the structure at least isn't absurd.";
+    else if (pct <= 8) note = "Heavy. Real counterparties walk away well before this. Someone in this chain is imaginary — usually the buyer, the seller, or both.";
+    else note = "No real counterparty on earth signs " + pct + "% away to a WhatsApp chain. This deal cannot close AS STRUCTURED — which means the 'closing' was never the plan. The fee was.";
+    $("chain-out").innerHTML = out + '<div class="note">' + note + "</div>";
+  }
+  $("nb").addEventListener("input", chain);
+  chain();
+
+  var PAGE = "https://desk.accentle.com/check/";
+  var WA_TEXT = "Before you spend another month on that SCO — paste it into Deal Check. Free, runs on your phone, shows the red flags and the chain math: " + PAGE;
+  $("wa").href = "https://wa.me/?text=" + encodeURIComponent(WA_TEXT);
+  $("copy").addEventListener("click", function () {
+    var done = function () { $("copy").textContent = "Copied!"; setTimeout(function () { $("copy").textContent = "Copy link"; }, 1400); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(PAGE).then(done, done);
+    else done();
+  });
+})();
+</script>
+</body>
+</html>

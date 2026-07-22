@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>REAL DEAL SHEET — your one-pager, every line checkable</title>
+<meta name="description" content="The mandate world runs on documents. Here's yours — a deal sheet where every line can be verified: real product, printed commission math, named operator, $0 to join.">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="REAL DEAL SHEET — every line checkable">
+<meta property="og:description" content="Generate your personal deal sheet: 50% of net per sale, 90-day window, monthly PayPal from Leafwind Studios Ltd, $0 to join. In the format the groups know — except real.">
+<meta property="og:image" content="https://desk.accentle.com/og/sheet.png">
+<meta property="og:url" content="https://desk.accentle.com/sheet/">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.png">
+<style>
+  :root {
+    --bg:#0b0f14; --panel:#111823; --panel2:#182230; --ink:#eef3f8; --dim:#8fa0b3;
+    --green:#3ddc84; --amber:#ffb454; --red:#ff6b6b; --line:#1f2c3d; --line2:#2a3a50;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg); color:var(--ink); min-height:100vh;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(ellipse 90% 40% at 50% -5%, #14243a 0%, transparent 60%);
+  }
+  .wrap { width:min(680px,92vw); margin:0 auto; padding:26px 0 80px; }
+  a { color:var(--green); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .brand { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .brand .name { font-weight:900; letter-spacing:.04em; font-size:15px; }
+  .brand .name .r { color:var(--green); }
+  .brand a.back { font-size:12.5px; font-weight:700; color:var(--dim); }
+  h1 { font-size:clamp(26px,5.6vw,38px); font-weight:900; letter-spacing:-.025em; line-height:1.1; margin-top:34px; }
+  h1 span { color:var(--green); }
+  .sub { color:var(--dim); font-size:15px; margin-top:10px; max-width:56ch; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px; margin-top:18px; }
+  .label { display:block; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); margin:14px 0 6px; }
+  .label:first-child { margin-top:0; }
+  input {
+    width:100%; background:var(--panel2); border:2px solid var(--line2); color:var(--ink);
+    border-radius:10px; padding:12px; font-size:16px; font-weight:600; outline:none; font-family:inherit;
+  }
+  input:focus { border-color:var(--green); }
+  .btn { display:block; width:100%; border:none; cursor:pointer; font-weight:800; border-radius:11px;
+         font-size:16px; padding:14px; margin-top:14px; font-family:inherit; background:var(--green); color:#06220f; }
+  .btn:active { transform:scale(.985); }
+  .btn:disabled { opacity:.55; cursor:default; }
+  .btn2 { background:var(--panel2); color:var(--ink); border:2px solid var(--line2); }
+  .msg { font-size:13px; margin-top:10px; min-height:17px; }
+  .msg.err { color:var(--red); } .msg.ok { color:var(--green); }
+  .msg a { font-weight:700; }
+  .preview { display:none; margin-top:18px; }
+  .preview.on { display:block; }
+  .preview canvas { width:100%; height:auto; border-radius:14px; border:1px solid var(--line2); display:block; }
+  .rowbtns { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+  @media (max-width:480px){ .rowbtns { grid-template-columns:1fr; } }
+  .note { font-size:12.5px; color:var(--dim); margin-top:12px; line-height:1.6; }
+  .foot { text-align:center; color:var(--dim); font-size:12px; margin-top:52px; line-height:1.7; }
+  .foot a { color:var(--dim); text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <div class="name">THE <span class="r">REAL</span> DESK</div>
+    <a class="back" href="/">← the desk</a>
+  </div>
+
+  <h1>REAL DEAL <span>SHEET</span></h1>
+  <p class="sub">The mandate world runs on documents — SCOs, FCOs, sheets full of unverifiable lines. Fine. Here's yours. Same shape the groups know, one difference: <b style="color:var(--ink)">every line on it can be checked by anyone, in a minute.</b></p>
+
+  <div class="card">
+    <label class="label" for="code">Your promoter code</label>
+    <input id="code" type="text" placeholder="e.g. K7QMP2X" maxlength="16" style="text-transform:uppercase; letter-spacing:.1em; font-weight:800;">
+    <label class="label" for="name">Name on the sheet (optional)</label>
+    <input id="name" type="text" placeholder="What your contacts call you" maxlength="40">
+    <button class="btn" id="gen">Generate my sheet</button>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <div class="preview" id="preview">
+    <canvas id="cv" width="1080" height="1350"></canvas>
+    <div class="rowbtns">
+      <button class="btn" id="dl" style="margin-top:0">Download PNG</button>
+      <button class="btn btn2" id="watext" style="margin-top:0">Copy text version</button>
+    </div>
+    <p class="note">Only real, registered codes render a sheet — that's the point of it. The text version is the same offer in plain words, ready for a chat where images feel heavy. Post it where you're known; never blast strangers. No income promises — the sheet already says what's true.</p>
+  </div>
+
+  <div class="card" style="border-style:dashed;">
+    <p style="font-size:14px; color:var(--dim);">No code yet? It's free and takes a minute — <a href="/#join">take the mandate at the desk</a>, then come back and print your sheet.</p>
+  </div>
+
+  <div class="foot">
+    Part of <a href="/">THE REAL DESK</a> · <a href="/check/">Deal Check</a> · <a href="/math/">The Math</a> · <a href="/kit/">Drop Kit</a><br>
+    Operator: Leafwind Studios Ltd · <a href="https://accentle.com/partners/terms/" rel="noopener">Terms</a> · No income promised. 18+.<br>
+    The Hive — powered by AI.
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var API_BASE = "https://letsplay-api.kingshotpro.workers.dev";
+  var $ = function (id) { return document.getElementById(id); };
+  var currentCode = "", currentName = "";
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function wrap(ctx, text, x, y, maxW, lh) {
+    var words = text.split(" "), line = "", yy = y;
+    for (var i = 0; i < words.length; i++) {
+      var t = line ? line + " " + words[i] : words[i];
+      if (ctx.measureText(t).width > maxW && line) { ctx.fillText(line, x, yy); line = words[i]; yy += lh; }
+      else line = t;
+    }
+    if (line) ctx.fillText(line, x, yy);
+    return yy + lh;
+  }
+
+  function draw(code, name) {
+    var cv = $("cv"), ctx = cv.getContext("2d");
+    var W = 1080, H = 1350, M = 64;
+    var F = '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif';
+
+    ctx.fillStyle = "#0b0f14"; ctx.fillRect(0, 0, W, H);
+    var g = ctx.createRadialGradient(W / 2, -100, 50, W / 2, -100, 900);
+    g.addColorStop(0, "#14243a"); g.addColorStop(1, "rgba(20,36,58,0)");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+    ctx.strokeStyle = "#2a3a50"; ctx.lineWidth = 2;
+    roundRect(ctx, M - 24, M - 24, W - 2 * (M - 24), H - 2 * (M - 24), 28); ctx.stroke();
+
+    // Head
+    ctx.fillStyle = "#182230";
+    roundRect(ctx, M, M, W - 2 * M, 92, 18); ctx.fill();
+    ctx.fillStyle = "#eef3f8"; ctx.font = "800 34px " + F; ctx.textBaseline = "middle";
+    ctx.fillText("REAL DEAL SHEET", M + 28, M + 47);
+    ctx.fillStyle = "#3ddc84"; ctx.font = "800 24px " + F; ctx.textAlign = "right";
+    ctx.fillText("VERIFIABLE · NO NDA", W - M - 28, M + 47);
+    ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+
+    var y = M + 92 + 66;
+
+    // Promoter + code
+    ctx.fillStyle = "#8fa0b3"; ctx.font = "800 22px " + F;
+    ctx.fillText("INDEPENDENT PROMOTER", M, y);
+    ctx.fillStyle = "#eef3f8"; ctx.font = "900 44px " + F;
+    ctx.fillText(name || "—", M, y + 52);
+    ctx.fillStyle = "#8fa0b3"; ctx.font = "800 22px " + F; ctx.textAlign = "right";
+    ctx.fillText("CODE", W - M, y);
+    ctx.fillStyle = "#3ddc84"; ctx.font = "900 44px " + F;
+    ctx.fillText(code, W - M, y + 52);
+    ctx.textAlign = "left";
+    y += 108;
+
+    // Divider
+    ctx.strokeStyle = "#1f2c3d"; ctx.beginPath(); ctx.moveTo(M, y); ctx.lineTo(W - M, y); ctx.stroke();
+    y += 54;
+
+    function row(k, lines) {
+      ctx.fillStyle = "#8fa0b3"; ctx.font = "800 21px " + F;
+      ctx.fillText(k, M, y);
+      ctx.fillStyle = "#eef3f8"; ctx.font = "600 27px " + F;
+      var yy = y;
+      for (var i = 0; i < lines.length; i++) { ctx.fillText(lines[i], M + 300, yy); yy += 38; }
+      y = Math.max(yy, y + 38) + 22;
+    }
+
+    row("PRODUCT", ["LET'S PLAY party game packs", "digital · instant · accentle.com/arcade"]);
+    row("COMMISSION", ["50% of net per sale", "$4.99 pack → $2.28 to you"]);
+    row("WINDOW", ["90 days per referred buyer"]);
+    row("MATURATION", ["30 days — the refund window"]);
+    row("PAYOUT", ["Monthly PayPal · $20 minimum", "Leafwind Studios Ltd (England & Wales)"]);
+    row("COST TO JOIN", ["$0.00 — at every stage, forever"]);
+
+    y += 6;
+    ctx.strokeStyle = "#1f2c3d"; ctx.beginPath(); ctx.moveTo(M, y); ctx.lineTo(W - M, y); ctx.stroke();
+    y += 58;
+
+    // Link box
+    ctx.fillStyle = "#182230";
+    roundRect(ctx, M, y, W - 2 * M, 108, 18); ctx.fill();
+    ctx.strokeStyle = "#3ddc84"; ctx.setLineDash([8, 7]); ctx.lineWidth = 2;
+    roundRect(ctx, M, y, W - 2 * M, 108, 18); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = "#8fa0b3"; ctx.font = "800 20px " + F;
+    ctx.fillText("THE LINK — this is the whole procedure", M + 26, y + 40);
+    ctx.fillStyle = "#3ddc84"; ctx.font = "900 33px " + F;
+    ctx.fillText("accentle.com/arcade/?amb=" + code, M + 26, y + 84);
+    y += 108 + 56;
+
+    // Footer truths
+    ctx.fillStyle = "#8fa0b3"; ctx.font = "600 22px " + F;
+    y = wrap(ctx, "No income promised. Most promoters earn nothing. What closes, pays.", M, y, W - 2 * M, 32);
+    y += 6;
+    ctx.fillStyle = "#5f7183"; ctx.font = "600 20px " + F;
+    y = wrap(ctx, "Verify everything: desk.accentle.com  ·  Terms: accentle.com/partners/terms  ·  18+", M, y, W - 2 * M, 30);
+
+    // Bottom brand
+    ctx.fillStyle = "#eef3f8"; ctx.font = "900 26px " + F;
+    ctx.fillText("THE", M, H - M + 6);
+    ctx.fillStyle = "#3ddc84";
+    ctx.fillText("REAL", M + ctx.measureText("THE ").width, H - M + 6);
+    ctx.fillStyle = "#eef3f8";
+    ctx.fillText("DESK", M + ctx.measureText("THE REAL ").width + 6, H - M + 6);
+    ctx.fillStyle = "#5f7183"; ctx.font = "600 20px " + F; ctx.textAlign = "right";
+    ctx.fillText("Small. Real. Paid.", W - M, H - M + 6);
+    ctx.textAlign = "left";
+  }
+
+  $("gen").addEventListener("click", async function () {
+    var btn = $("gen"), msg = $("msg");
+    var code = $("code").value.trim().toUpperCase();
+    var name = $("name").value.trim();
+    msg.className = "msg"; msg.textContent = "";
+    if (!code) { msg.className = "msg err"; msg.textContent = "Enter your code — sheets only render for real, registered codes."; return; }
+    btn.disabled = true; var orig = btn.textContent; btn.textContent = "Verifying code…";
+    try {
+      var r = await fetch(API_BASE + "/api/amb/stats?code=" + encodeURIComponent(code));
+      var s = await r.json();
+      if (s && s.ok) {
+        currentCode = code; currentName = name;
+        draw(code, name);
+        $("preview").classList.add("on");
+        msg.className = "msg ok"; msg.textContent = "Verified against the live ledger. This sheet is real because the code is.";
+        $("preview").scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } else {
+        $("preview").classList.remove("on");
+        msg.className = "msg err";
+        msg.innerHTML = 'That code isn’t in the ledger. Sheets only render for registered codes — <a href="/#join">get yours free at the desk</a>, then come back.';
+      }
+    } catch (e) {
+      msg.className = "msg err"; msg.textContent = "Network hiccup — try again in a moment.";
+    } finally {
+      btn.disabled = false; btn.textContent = orig;
+    }
+  });
+
+  $("dl").addEventListener("click", function () {
+    var a = document.createElement("a");
+    a.download = "real-deal-sheet-" + (currentCode || "desk") + ".png";
+    a.href = $("cv").toDataURL("image/png");
+    a.click();
+  });
+
+  $("watext").addEventListener("click", function () {
+    var t = "REAL DEAL SHEET — " + (currentName ? currentName + " · " : "") + "code " + currentCode + "\n" +
+      "Product: LET'S PLAY party game packs — digital, instant, playable at accentle.com/arcade\n" +
+      "Commission: 50% of net per sale — a $4.99 pack pays $2.28\n" +
+      "Window: 90 days per referred buyer · Maturation: 30 days\n" +
+      "Payout: monthly PayPal, $20 minimum, from Leafwind Studios Ltd (England & Wales)\n" +
+      "Cost to join: $0.00 — at every stage, forever\n" +
+      "My link: https://accentle.com/arcade/?amb=" + currentCode + "\n" +
+      "Verify everything: https://desk.accentle.com · Terms: https://accentle.com/partners/terms\n" +
+      "No income promised. Most promoters earn nothing. What closes, pays.";
+    var done = function () { $("watext").textContent = "Copied!"; setTimeout(function () { $("watext").textContent = "Copy text version"; }, 1400); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, done);
+    else done();
+  });
+})();
+</script>
+</body>
+</html>

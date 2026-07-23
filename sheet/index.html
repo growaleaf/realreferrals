@@ -8,8 +8,8 @@
 <meta name="robots" content="index,follow">
 <meta property="og:title" content="REAL DEAL SHEET — every line checkable">
 <meta property="og:description" content="Generate your personal deal sheet: 50% of net per sale, 90-day window, monthly PayPal from Leafwind Studios Ltd, $0 to join. The familiar one-pager format, built to be checked.">
-<meta property="og:image" content="https://desk.defimagic.io/og/sheet.png">
-<meta property="og:url" content="https://desk.defimagic.io/sheet/">
+<meta property="og:image" content="https://refer.defimagic.io/og/sheet.png">
+<meta property="og:url" content="https://refer.defimagic.io/sheet/">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.png">
 <style>
@@ -67,7 +67,7 @@
 <body>
 <div class="wrap">
     <div class="brand">
-    <a class="name" href="/">THE <span class="r">REAL</span> DESK</a>
+    <a class="name" href="/"><span class="r">REAL</span> REFERRALS</a>
     <nav>
       <a href="/guide/">Guide</a>
       <a href="/demo/">Sample</a>
@@ -100,11 +100,11 @@
   </div>
 
   <div class="card" style="border-style:dashed;">
-    <p style="font-size:14px; color:var(--dim);">No code yet? It's free and takes a minute — <a href="/#join">take control at the desk</a>, then come back and print your sheet.</p>
+    <p style="font-size:14px; color:var(--dim);">No code yet? It's free and takes a minute — <a href="/#join">take control here</a>, then come back and print your sheet.</p>
   </div>
 
   <div class="foot">
-    Part of <a href="/">THE REAL DESK</a> · <a href="/check/">Deal Check</a> · <a href="/math/">The Math</a> · <a href="/kit/">Drop Kit</a><br>
+    Part of <a href="/">REAL REFERRALS</a> · <a href="/check/">Deal Check</a> · <a href="/math/">The Math</a> · <a href="/kit/">Drop Kit</a><br>
     Operator: Leafwind Studios Ltd · <a href="https://accentle.com/partners/terms/" rel="noopener">Terms</a> · Earnings depend on your effort — no specific income is promised. 18+.<br>
     The Hive — powered by AI.
   </div>
@@ -214,15 +214,15 @@
     y = wrap(ctx, "No hype — earnings follow the work. Every sale pays, and there is no cap.", M, y, W - 2 * M, 32);
     y += 6;
     ctx.fillStyle = "#5f7183"; ctx.font = "600 20px " + F;
-    y = wrap(ctx, "Verify everything: desk.defimagic.io  ·  Terms: accentle.com/partners/terms  ·  18+", M, y, W - 2 * M, 30);
+    y = wrap(ctx, "Verify everything: refer.defimagic.io  ·  Terms: accentle.com/partners/terms  ·  18+", M, y, W - 2 * M, 30);
 
     // Bottom brand
     ctx.fillStyle = "#eef3f8"; ctx.font = "900 26px " + F;
-    ctx.fillText("THE", M, H - M + 6);
+    ctx.fillText("REAL", M, H - M + 6);
     ctx.fillStyle = "#3ddc84";
-    ctx.fillText("REAL", M + ctx.measureText("THE ").width, H - M + 6);
+    ctx.fillText("REFERRALS", M + ctx.measureText("REAL ").width, H - M + 6);
     ctx.fillStyle = "#eef3f8";
-    ctx.fillText("DESK", M + ctx.measureText("THE REAL ").width + 6, H - M + 6);
+    
     ctx.fillStyle = "#5f7183"; ctx.font = "600 20px " + F; ctx.textAlign = "right";
     ctx.fillText("Small. Real. Paid.", W - M, H - M + 6);
     ctx.textAlign = "left";
@@ -247,7 +247,7 @@
       } else {
         $("preview").classList.remove("on");
         msg.className = "msg err";
-        msg.innerHTML = 'That code isn’t in the ledger. Sheets only render for registered codes — <a href="/#join">get yours free at the desk</a>, then come back.';
+        msg.innerHTML = 'That code isn’t in the ledger. Sheets only render for registered codes — <a href="/#join">get yours free here</a>, then come back.';
       }
     } catch (e) {
       msg.className = "msg err"; msg.textContent = "Network hiccup — try again in a moment.";
@@ -258,7 +258,7 @@
 
   $("dl").addEventListener("click", function () {
     var a = document.createElement("a");
-    a.download = "real-deal-sheet-" + (currentCode || "desk") + ".png";
+    a.download = "real-deal-sheet-" + (currentCode || "referrals") + ".png";
     a.href = $("cv").toDataURL("image/png");
     a.click();
   });
@@ -271,7 +271,7 @@
       "Payout: monthly PayPal, $20 minimum, from Leafwind Studios Ltd — UK co. 17252962 (Companies House)\n" +
       "Cost to join: $0.00 — no paid stage exists\n" +
       "My link: https://accentle.com/arcade/?amb=" + currentCode + "\n" +
-      "Verify everything: https://desk.defimagic.io · Terms: https://accentle.com/partners/terms\n" +
+      "Verify everything: https://refer.defimagic.io · Terms: https://accentle.com/partners/terms\n" +
       "No hype — earnings follow the work. Every sale pays, and there is no cap.";
     var done = function () { $("watext").textContent = "Copied!"; setTimeout(function () { $("watext").textContent = "Copy text version"; }, 1400); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, done);

@@ -85,7 +85,7 @@
   <h1>THE <span>MATH</span></h1>
   <p class="sub">Two deals, side by side: a large brokered deal, and the one on this desk. The same arithmetic applies to both — here it is written out in full.</p>
 
-  <div class="secH">Deal A — the one you're chasing</div>
+  <div class="secH">Deal A — the big one, while it's pending</div>
   <div class="card">
     <div class="row2">
       <div><label for="size">Deal size (USD)</label><input id="size" type="number" value="50000000" min="0" inputmode="numeric"></div>
@@ -93,14 +93,12 @@
     </div>
     <div class="row2">
       <div><label for="brokers">Brokers in the chain</label><input id="brokers" type="number" value="7" min="1" max="30" inputmode="numeric"></div>
-      <div><label for="years">Years it's been open</label><input id="years" type="number" value="3" min="0" max="40" inputmode="numeric"></div>
     </div>
     <div class="out">
       <div class="line"><span class="k">Your commission if it closes</span><span class="v amber" id="a-if">$1,000,000</span></div>
       <div class="line"><span class="k">Chain load (all brokers on your %)</span><span class="v" id="a-chain">14% of the deal</span></div>
       <div class="line"><span class="k">Deals with this anatomy that close</span><span class="v red">effectively none</span></div>
       <div class="line"><span class="k">Expected value</span><span class="v red" id="a-ev">$0</span></div>
-      <div class="line"><span class="k">Time invested so far</span><span class="v" id="a-cost">3 years</span></div>
       <div class="big red" id="a-big">2% of zero is zero.</div>
       <div class="note">The commission is real arithmetic on an unreal number. Multiply anything by a closing probability of zero and the answer never changes — no matter how many zeros the deal has.</div>
     </div>
@@ -122,7 +120,7 @@
   </div>
 
   <div class="punch">
-    <b>The line that matters:</b> a million dollars at probability zero is worth less than $2.28 at probability one. The first half of that is familiar to anyone who has worked a large deal. Acting on the second half is how people start building networks that actually pay — sized however they choose to build them. The real prize is not the $2.28; it is a deal whose outcome answers to your effort. After that, everything you build stands on solid ground, and how big it gets is up to you.
+    <b>The line that matters:</b> a million dollars at probability zero is worth less than $2.28 at probability one. The first half of that is familiar to anyone who has worked a large deal. Acting on the second half is how people start building networks that actually pay — sized however they choose to build them. The real prize is not the $2.28; it is a deal whose outcome answers to your effort. After that, everything you build stands on solid ground, and how big it gets is up to you. And nothing on this page says walk away from the big one — deals that size stay pending for years, and professionals run a bridge line in the meantime. If it lands someday, that's a good day. Until then, this one pays.
   </div>
 
   <a class="cta" href="/">See the deal that multiplies by one →</a>
@@ -148,16 +146,14 @@
     var size = Math.max(0, parseFloat($("size").value || "0"));
     var pct = Math.max(0, Math.min(100, parseFloat($("pct").value || "0")));
     var brokers = Math.max(1, Math.min(30, parseInt($("brokers").value || "1", 10)));
-    var years = Math.max(0, Math.min(40, parseInt($("years").value || "0", 10)));
     var ifCloses = size * pct / 100;
     var chain = brokers * pct;
     $("a-if").textContent = fmt(ifCloses);
     $("a-chain").textContent = (Math.round(chain * 10) / 10) + "% of the deal";
     $("a-ev").textContent = "$0";
-    $("a-cost").textContent = years === 0 ? "—" : years + " year" + (years === 1 ? "" : "s");
     $("a-big").textContent = pct + "% of zero is zero.";
   }
-  ["size", "pct", "brokers", "years"].forEach(function (id) { $(id).addEventListener("input", dealA); });
+  ["size", "pct", "brokers"].forEach(function (id) { $(id).addEventListener("input", dealA); });
 
   function dealB() {
     var n = parseInt($("sales").value, 10);

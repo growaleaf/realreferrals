@@ -7,7 +7,7 @@
 <meta name="description" content="Free checker for WhatsApp broker deals — BLCO, gold dust, SBLC, BTC OTC, MTN bulk. Paste the text, see the red flags, the chain math, and the 60-second reality test. Nothing is uploaded.">
 <meta name="robots" content="index,follow">
 <meta property="og:title" content="DEAL CHECK — paste the deal, get the truth">
-<meta property="og:description" content="Before you spend another month on that SCO: paste it here. Red flags, chain math, verdict. Free, runs on your phone, nothing uploaded.">
+<meta property="og:description" content="Thirty seconds before committing to any offer: paste it here. Red flags, chain math, verdict. Free, runs on your phone, nothing uploaded.">
 <meta property="og:image" content="https://desk.defimagic.io/og/check.png">
 <meta property="og:url" content="https://desk.defimagic.io/check/">
 <meta property="og:type" content="website">
@@ -112,7 +112,7 @@
   </div>
 
   <h1>DEAL <span>CHECK</span></h1>
-  <p class="sub">Paste the deal — the SCO, the "mandate offer", the OTC message. This runs on your phone; nothing is uploaded, nobody sees what you paste. Built from the anatomy of a decade of WhatsApp mandate deals.</p>
+  <p class="sub">Paste the deal — the SCO, the "mandate offer", the OTC message. This runs on your phone; nothing is uploaded, nobody sees what you paste. Built from the documented anatomy of a decade of brokered-deal patterns.</p>
 
   <div class="card">
     <textarea id="deal" placeholder="Paste the deal text here…" spellcheck="false"></textarea>
@@ -242,7 +242,7 @@
       why = "Multiple structural markers of advance-fee fraud. In the documented history of these patterns, the money moves in one direction only: from the intermediary, as 'fees'. Do not send anyone anything.";
     } else {
       cls = "v-high";
-      big = "THE PATTERN — this is the machine itself.";
+      big = "THE PATTERN — this matches the documented playbook, end to end.";
       why = "This message is assembled from the standard kit: instruments or commodities that exist on paper, a procedure that feels official, a chain standing on percents, and somewhere ahead of you — a fee. Years go in. Nothing comes out. You are the product.";
     }
     V.className = "verdict on " + cls;
@@ -271,7 +271,7 @@
   chain();
 
   var PAGE = "https://desk.defimagic.io/check/";
-  var WA_TEXT = "Before you spend another month on that SCO — paste it into Deal Check. Free, runs on your phone, shows the red flags and the chain math: " + PAGE;
+  var WA_TEXT = "Worth thirty seconds before committing to any offer — paste it into Deal Check. Free, runs on your phone, shows the red flags and the chain math: " + PAGE;
   $("wa").href = "https://wa.me/?text=" + encodeURIComponent(WA_TEXT);
   $("copy").addEventListener("click", function () {
     var done = function () { $("copy").textContent = "Copied!"; setTimeout(function () { $("copy").textContent = "Copy link"; }, 1400); };
